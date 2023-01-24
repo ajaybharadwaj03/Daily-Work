@@ -1,0 +1,13 @@
+class Solution {
+    public boolean checkTree(TreeNode root) {
+        if(root == null){
+            return false;
+        }
+        int lef= root.left.val;
+        int rig = root.right.val;
+        if(lef+rig!=root.val){
+            return false;
+        }
+        return true;
+    }
+}
