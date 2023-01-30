@@ -1,0 +1,8 @@
+import java.util.*;
+class Solution {
+    public int findMin(int[] nums) {
+        if(nums.length==0){return Integer.MIN_VALUE;}
+        Arrays.sort(nums);
+        return nums[0];
+    }
+}
