@@ -1,0 +1,38 @@
+import java.util.*;
+import java.util.Collections.*;
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    ArrayList<Integer>ar = new ArrayList<>();
+    public int getMinimumDifference(TreeNode root) {
+        if(root==null){return 0;}
+        ArrayList<Integer> ar1 = new ArrayList<>();
+        diffNode(root);
+        for(int i=1;i<ar.size();i++){
+            ar1.add(ar.get(i)-ar.get(i-1));
+        }
+        return Collections.min(ar1);
+    }
+    public void diffNode(TreeNode root){
+        if(root==null){
+            return ;
+        }
+        diffNode(root.left);
+        ar.add(root.val);
+        diffNode(root.right);
+        return ;
+    }
+}
