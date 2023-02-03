@@ -1,0 +1,36 @@
+	/* 
+    
+    class Node 
+    	int data;
+    	Node left;
+    	Node right;
+	*/
+	public static void topView(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        Queue<Integer> off = new LinkedList<>();
+        TreeMap<Integer,Integer> map = new TreeMap<>();
+        if(root == null){System.out.println();}
+        q.add(root);
+        off.add(0);
+        while(q.size()>0){
+            int s=q.size();
+            for(int i=1;i<=s;i++){
+                Node curr = q.poll();
+                int offset =off.poll();
+                if(!map.containsKey(offset)){
+                    map.put(offset,curr.data);
+                }
+                if(curr.left!=null){
+                    q.add(curr.left);
+                    off.add(offset-1);
+                }
+                if(curr.right!=null){
+                    q.add(curr.right);
+                    off.add(offset+1);
+                }
+            }
+        }
+        for(Map.Entry<Integer,Integer> entry: map.entrySet()){
+             System.out.print(entry.getValue()+" ");
+        }
+    }
