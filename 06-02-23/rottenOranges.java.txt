@@ -1,0 +1,52 @@
+class Pair{
+    int r,c;
+    Pair(int r,int c){
+        this.r = r;
+        this.c = c;
+   }
+}
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        Queue<Pair> q = new LinkedList<>();
+        int t = 0,time = 0,rot = 0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1 || grid[i][j]==2){
+                    t+=1;
+                }
+                if(grid[i][j]==2){
+                    q.add(new Pair(i,j));
+                }
+            }
+        }
+        if(t==0){return 0;}
+        while(q.size()>0){
+            int s = q.size();
+            rot+=s;
+            if (rot == t) 
+                return time;
+            time++;
+            for (int i = 0; i < s; i++) {
+                Pair p = q.peek();  
+                if(p.r + 1<grid.length && grid[p.r + 1][p.c] == 1){
+                    grid[p.r + 1][p.c] = 2;
+                    q.add(new Pair(p.r + 1, p.c));
+                }
+                if(p.r - 1 >= 0 && grid[p.r - 1][p.c] == 1) {
+                    grid[p.r - 1][p.c] = 2;
+                    q.add(new Pair(p.r - 1, p.c));
+                }
+                if(p.c + 1<grid[0].length && grid[p.r][p.c + 1]==1){
+                    grid[p.r][p.c + 1] = 2;
+                    q.add(new Pair(p.r, p.c + 1));
+                }
+                if (p.c - 1 >= 0 && grid[p.r][p.c - 1] == 1) {
+                    grid[p.r][p.c - 1] = 2;
+                    q.add(new Pair(p.r, p.c - 1));
+                }
+                q.poll();
+            }
+        }
+        return -1;
+    }
+}
