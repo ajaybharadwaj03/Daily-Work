@@ -1,0 +1,39 @@
+class Pair{
+    int r,c;
+    Pair(int r, int c){
+        this.r = r;
+        this.c = c;
+    }
+}
+class Solution {
+    public int[][] floodFill(int[][] imaged, int sr, int sc, int color) {
+        Queue<Pair> q = new LinkedList<>();
+        int ff = imaged[sr][sc];
+        if(ff == color){return imaged;}
+        q.add(new Pair(sr,sc));
+        imaged[sr][sc] = color;
+        while(q.size()>0){
+            int s = q.size();
+            for(int i=0;i<s;i++){
+                Pair p = q.poll();  
+                if(p.r + 1<imaged.length && imaged[p.r + 1][p.c] == ff){
+                    imaged[p.r + 1][p.c] = color;
+                    q.add(new Pair(p.r + 1, p.c));
+                }
+                if(p.r - 1 >= 0 && imaged[p.r - 1][p.c] == ff) {
+                    imaged[p.r - 1][p.c] = color;
+                    q.add(new Pair(p.r - 1, p.c));
+                }
+                if(p.c + 1<imaged[0].length && imaged[p.r][p.c + 1]==ff){
+                    imaged[p.r][p.c + 1] = color;
+                    q.add(new Pair(p.r, p.c + 1));
+                }
+                if (p.c - 1 >= 0 && imaged[p.r][p.c - 1] == ff) {
+                    imaged[p.r][p.c - 1] = color;
+                    q.add(new Pair(p.r, p.c - 1));
+                }
+            }
+        }
+        return imaged;
+    }
+}
